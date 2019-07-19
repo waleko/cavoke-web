@@ -294,7 +294,7 @@
        this.options.loop = false;
        this.options.dots = false;
        this.options.mouseDrag = false;
-       this.options.touchDrag = false;
+       this.options.touchDrag = true;
        this.options.pullDrag = false;
        this.options.freeDrag = false;
      } else {
