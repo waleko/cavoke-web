@@ -27,7 +27,7 @@ export class AppComponent {
     if (!isFound) {
       const dynamicScripts = ['/assets/js/main.js'];
 
-      for (let i = 0; i < dynamicScripts .length; i++) {
+      for (let i = 0; i < dynamicScripts.length; i++) {
         const node = document.createElement('script');
         node.src = dynamicScripts [i];
         node.type = 'text/javascript';
@@ -35,7 +35,6 @@ export class AppComponent {
         node.charset = 'utf-8';
         document.getElementsByTagName('head')[0].appendChild(node);
       }
-
     }
   }
 }

@@ -315,5 +315,7 @@
             window.location.hash = target;
         });
     });
+    $('li.active').removeClass('active');
+    $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
   });
 })(jQuery);
