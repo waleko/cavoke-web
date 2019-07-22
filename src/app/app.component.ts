@@ -7,9 +7,11 @@ import {Subject} from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   loadAPI: Promise<any>;
   show_signin_button = new Subject<any>();
+
 
   constructor(public afAuth: AngularFireAuth) {
     this.afAuth.auth.onAuthStateChanged(user => {

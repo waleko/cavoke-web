@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -56,7 +57,10 @@ const firebaseConfig = {
     AppComponent, HomeComponent, ContactComponent, LibraryComponent, GameComponent, CanvasComponent, GameInfoComponent, GameInfoSlimComponent, LoginComponent, ColorBarComponent, LicenseComponent, PrivacyPolicyComponent, NotfoundComponent, TermsOfServiceComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(appRoutes), NgbModule,
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    NgbModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirePerformanceModule,
