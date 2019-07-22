@@ -1,1 +1,16 @@
-<p>login works!</p>
+<app-color-bar title="Sign in"></app-color-bar>
+<!--<p>-->
+<!--  login works-->
+<!--</p>-->
+<!--<firebase-ui></firebase-ui>-->
+<section class="ftco-section">
+  <div class="container" style="max-width: 480px;">
+    <ngx-auth-firebaseui appearance="outline"
+                         [providers]="providers.Github"
+                         tosUrl="/terms-of-service"
+                         privacyPolicyUrl="/privacy-policy"
+                         goBackURL="/"
+                         (onSuccess)="goToHomepage()"
+    ></ngx-auth-firebaseui>
+  </div>
+</section>

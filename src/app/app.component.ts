@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +9,30 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   loadAPI: Promise<any>;
+  show_signin_button = new Subject<any>();
 
-  constructor() {
+  constructor(public afAuth: AngularFireAuth) {
+    this.afAuth.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.show_signin_button.next(false);
+      }
+      else {
+        this.show_signin_button.next(true);
+      }
+    });
+    this.checkUser();
     this.loadAPI = new Promise((resolve) => {
       this.loadScript();
       resolve(true);
     });
+  }
+
+  public checkUser() {
+    if (this.afAuth.auth.currentUser) {
+      this.show_signin_button.next(false);
+    } else {
+      this.show_signin_button.next(true);
+    }
   }
 
   public loadScript() {
@@ -37,4 +57,5 @@ export class AppComponent {
       }
     }
   }
+
 }

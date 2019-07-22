@@ -10,7 +10,12 @@
         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/library">Games</a></li>
         <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-        <li class="nav-item cta"><a class="nav-link" href="/signin"><span>Sign in</span></a></li>
+        <li class="nav-item cta" *ngIf="show_signin_button | async"><a class="nav-link" href="/login"><span>Sign in</span></a></li>
+        <li class="nav-item">
+          <div style="padding: 4px;">
+            <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -39,6 +44,7 @@
             <li><a class="py-2 d-block ftco-animate" href="/contact">Contact</a></li>
             <li><a class="py-2 d-block ftco-animate" href="/license">License</a></li>
             <li><a class="py-2 d-block ftco-animate" href="/privacy-policy">Privacy policy</a></li>
+            <li><a class="py-2 d-block ftco-animate" href="/terms-of-service">Terms of service</a></li>
           </ul>
         </div>
       </div>
