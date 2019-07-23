@@ -15,6 +15,6 @@ export const appRoutes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicyComponent},
   { path: 'terms-of-service', component: TermsOfServiceComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'library', component: LibraryComponent},
+  { path: 'library-test', component: LibraryComponent},
   { path: '**', component: NotfoundComponent},
 ];

@@ -11,8 +11,14 @@ export class LibraryComponent implements OnInit {
   public game_infos;
 
   constructor(private service: LibraryService) {
-    let types = service.getTypes();
-    console.log(types)
+    service.getTypes().subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   ngOnInit() {
