@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {LibraryService} from './library.service';
+import {GameInfoComponent} from '../game-info/game-info.component';
+import {BackendService} from '../../services/backend.service';
 
 @Component({
   selector: 'app-library',
@@ -8,13 +9,18 @@ import {LibraryService} from './library.service';
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent implements OnInit {
-  public game_infos;
+  public game_infos = [];
 
-  constructor(private service: LibraryService) {
+  constructor(private service: BackendService) {
     service.getTypes().subscribe(
       data => {
-        console.log(data);
-      },
+        if(data['status'] != 'OK') {
+          console.error("Not ok response!");
+          console.log(data['message']);
+          return;
+        }
+        this.game_infos = data['response']['game_types'];
+        },
       err => {
         console.log(err);
       }

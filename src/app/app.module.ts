@@ -54,24 +54,41 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, ContactComponent, LibraryComponent, GameComponent, CanvasComponent, GameInfoComponent, GameInfoSlimComponent, LoginComponent, ColorBarComponent, LicenseComponent, PrivacyPolicyComponent, NotfoundComponent, TermsOfServiceComponent
+    AppComponent,
+    HomeComponent,
+    ContactComponent,
+    LibraryComponent,
+    GameComponent,
+    CanvasComponent,
+    GameInfoComponent,
+    GameInfoSlimComponent,
+    LoginComponent,
+    ColorBarComponent,
+    LicenseComponent,
+    PrivacyPolicyComponent,
+    NotfoundComponent,
+    TermsOfServiceComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     NgbModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirePerformanceModule,
     BrowserAnimationsModule,
-    NgxAuthFirebaseUIModule.forRoot(firebaseConfig, () => "cavoke_factory",
+    NgxAuthFirebaseUIModule.forRoot(firebaseConfig,
+      AppModule.f,
       {
         enableFirestoreSync: false
-      })
+      }),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirePerformanceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  static f() {
+    return "cavoke_factory"
+} }
 

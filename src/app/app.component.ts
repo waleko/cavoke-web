@@ -11,6 +11,7 @@ import {Subject} from 'rxjs';
 export class AppComponent {
   loadAPI: Promise<any>;
   show_signin_button = new Subject<any>();
+  public year;
 
 
   constructor(public afAuth: AngularFireAuth) {
@@ -27,6 +28,7 @@ export class AppComponent {
       this.loadScript();
       resolve(true);
     });
+    this.year = new Date().getFullYear();
   }
 
   public checkUser() {

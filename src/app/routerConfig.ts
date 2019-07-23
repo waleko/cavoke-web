@@ -7,6 +7,7 @@ import {NotfoundComponent} from './components/notfound/notfound.component';
 import {LoginComponent} from './components/login/login.component';
 import {TermsOfServiceComponent} from './components/terms-of-service/terms-of-service.component';
 import {LibraryComponent} from './components/library/library.component';
+import {GameComponent} from './components/game/game.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -15,6 +16,7 @@ export const appRoutes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicyComponent},
   { path: 'terms-of-service', component: TermsOfServiceComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'library-test', component: LibraryComponent},
+  { path: 'library', component: LibraryComponent},
+  { path: 'game', component: GameComponent},
   { path: '**', component: NotfoundComponent},
 ];
