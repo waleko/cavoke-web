@@ -9,21 +9,22 @@ import {AngularFireAuth} from '@angular/fire/auth';
 export class BackendService {
   private afAuth: AngularFireAuth;
   constructor(private httpClient: HttpClient, afAuth: AngularFireAuth) {
-    this.afAuth = afAuth;}
+    this.afAuth = afAuth;
+  }
   private static makeUrl(method: string) {
-    return environment.api_home + method
+    return environment.api_home + method;
   }
   private getAuthHeader() {
-    return new HttpHeaders({'Authorization':'JWT ' + this.afAuth.idToken});
+    return new HttpHeaders({Authorization : 'JWT ' + this.afAuth.idToken});
   }
   public getTypes() {
-    return this.httpClient.get(BackendService.makeUrl('getTypes'), {headers: this.getAuthHeader()})
+    return this.httpClient.get(BackendService.makeUrl('getTypes'), {headers: this.getAuthHeader()});
   }
   public getSessions() {
-    return this.httpClient.get(BackendService.makeUrl('getSessions'))
+    return this.httpClient.get(BackendService.makeUrl('getSessions'));
   }
   public createSession(game_type_id: string) {
     return this.httpClient.get(BackendService.makeUrl('newSession'),
-      {headers: this.getAuthHeader(), params: {'game_type_id': game_type_id}})
+      {headers: this.getAuthHeader(), params: {game_type_id}});
   }
 }
