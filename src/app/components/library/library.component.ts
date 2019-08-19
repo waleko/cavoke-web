@@ -9,17 +9,17 @@ import {BackendService} from '../../services/backend.service';
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent implements OnInit {
-  public game_infos = [];
+  public gameInfos = [];
 
   constructor(private service: BackendService) {
     service.getTypes().subscribe(
       data => {
-        if(data['status'] != 'OK') {
-          console.error("Not ok response!");
-          console.log(data['message']);
+        if (data.status != 'OK') {
+          console.error('Not ok response!');
+          console.log(data.message);
           return;
         }
-        this.game_infos = data['response']['game_types'];
+        this.gameInfos = data.response.game_types;
         },
       err => {
         console.log(err);
