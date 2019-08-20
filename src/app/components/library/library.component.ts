@@ -14,12 +14,12 @@ export class LibraryComponent implements OnInit {
   constructor(private service: BackendService) {
     service.getTypes().subscribe(
       data => {
-        if (data.status != 'OK') {
+        if (data['status'] != 'OK') {
           console.error('Not ok response!');
-          console.log(data.message);
+          console.log(data['message']);
           return;
         }
-        this.gameInfos = data.response.game_types;
+        this.gameInfos = data['response'].game_types;
         },
       err => {
         console.log(err);

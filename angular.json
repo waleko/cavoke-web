@@ -23,6 +23,8 @@
               "src/favicon.ico",
               "src/404.html",
               "src/assets",
+              "src/manifest.json",
+              "src/robots.txt",
               {
                 "glob": "**/*",
                 "input": "node_modules/ngx-auth-firebaseui/assets/",
