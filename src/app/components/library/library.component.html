@@ -1,7 +1,7 @@
 <app-color-bar title="Game library"></app-color-bar>
 <section class="ftco-section">
   <div class="container">
-    <p *ngIf="gameInfos.length < 1">No games available</p>
+    <p *ngIf="gameInfos.length == 0">No games available</p>
     <div class="row" *ngFor="let game_info of gameInfos">
       <div class="col-md-4">
         <div class="card mb-4">

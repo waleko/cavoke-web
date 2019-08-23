@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_home: 'https://api.cavoke.alexkovrigin.me/v1/'
+  api_home: 'http://localhost:8000/v1/'
 };
 
 /*

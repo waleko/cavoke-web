@@ -16,16 +16,24 @@ export class GameComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        console.log(params);
+        console.log(params); // FIXME remove
         if("type" in params) {
+          console.log("in"); // FIXME remove
           const game_type_id = params['type'];
-          this.service.createSession(game_type_id).subscribe(
+          console.log(game_type_id);
+          const promise = this.service.createSession(game_type_id);
+          console.log(promise);
+          promise.subscribe(
             data => {
-              if(data['status'] != 'OK') {
+              console.log("yikes");
+              console.log(data);
+              if (data['status'] != 'OK') {
                 console.error("Not ok response!");
                 console.log(data['message']);
                 return;
               }
+              console.log("ok");
+              console.log("data");
               const game = data['response']['game'];
               const game_id = game.game_session_id;
               window.location.href = '/game?game_id=' + game_id;
@@ -39,9 +47,9 @@ export class GameComponent implements OnInit {
 
         }
       });
-    this.ngAfterViewInit();
+    // this.ngAfterViewInit();
   }
-  ngAfterViewInit(): void {
-    this.context = (<HTMLCanvasElement>this.myCanvas.nativeElement).getContext('2d');
-  }
+  // ngAfterViewInit() {
+  //   this.context = (<HTMLCanvasElement>this.myCanvas.nativeElement).getContext('2d');
+  // }
 }
