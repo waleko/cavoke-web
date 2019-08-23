@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase';
+import {tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -109,17 +111,9 @@ export class BackendService {
   private sendAuthRequest(method: string, url_params={})
   {
     const url = BackendService.makeUrl(method);
-    let ans;
-    this.afAuth.authState.subscribe(auth => {
+    var subject = new Subject<Promise<any>>();
+    const obs = this.afAuth.authState.subscribe(auth => {
       console.log(auth);
-      // ans = auth.getIdToken().then(token => {
-      //       console.log(token);
-      //       const header = new HttpHeaders({Authorization : 'JWT ' + token});
-      //       const result = this.httpClient.get(url, {headers: header, params: url_params});
-      //       console.log(result);
-      //       return result;
-      //     });
-      //   });
       const promise = new Promise(resolve => {
         auth.getIdToken().then(token => {
           console.log(token);
@@ -127,14 +121,14 @@ export class BackendService {
           this.httpClient.get(url, {headers: header, params: url_params}).subscribe(data => {resolve(data)});
         });
       });
-      console.log('umba');
+      console.log("umba");
       console.log(promise);
-      ans = promise;
-      console.log(promise);
+      subject.next(promise);
+      console.log(subject)
     });
     console.log("kumba");
-    console.log(ans);
-    return ans;
+    console.log(subject);
+    return subject.asObservable();
   }
 
   public createSession(gameTypeId: string) {
