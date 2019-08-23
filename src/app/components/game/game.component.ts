@@ -22,8 +22,9 @@ export class GameComponent implements OnInit {
           const game_type_id = params['type'];
           console.log(game_type_id);
           const promise = this.service.createSession(game_type_id);
+          console.log("bumba");
           console.log(promise);
-          promise.subscribe(
+          promise.then(
             data => {
               console.log("yikes");
               console.log(data);
