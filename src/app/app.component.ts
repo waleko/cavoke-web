@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Subject} from 'rxjs';
 
@@ -18,8 +18,7 @@ export class AppComponent {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
         this.show_signin_button.next(false);
-      }
-      else {
+      } else {
         this.show_signin_button.next(true);
       }
     });

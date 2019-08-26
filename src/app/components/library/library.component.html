@@ -1,16 +1,24 @@
 <app-color-bar title="Game library"></app-color-bar>
 <section class="ftco-section">
   <div class="container">
+    <div class="d-flex flex-row-reverse">
+      <a href="/new-game">
+        <button type="button" class="btn btn-primary" >New game</button>
+      </a>
+    </div>
+  </div>
+  <div class="container">
+<!--    https://icons8.com/ouch/illustration/list-is-empty-3-->
     <p *ngIf="gameInfos.length == 0">No games available</p>
-    <div class="row" *ngFor="let game_info of gameInfos">
+    <div *ngFor="let game_info of gameInfos" class="row">
       <div class="col-md-4">
         <div class="card mb-4">
-          <img class="card-img-top" src="//placeimg.com/290/180/any" alt="Card image cap">
+          <img alt="Card image cap" class="card-img-top" src="//placeimg.com/290/180/any">
           <div class="card-body">
             <h5 class="card-title">{{game_info.name}}</h5>
             <p class="card-text">{{game_info.description}}</p>
             <p style="color: #d1d1d1">by {{game_info.creator_display_name}}</p>
-            <a href="/game?type={{game_info.game_type_id}}" class="btn btn-outline-dark btn-sm">Play</a>
+            <a class="btn btn-outline-dark btn-sm" href="/game?type={{game_info.game_type_id}}">Play</a>
           </div>
         </div>
       </div>

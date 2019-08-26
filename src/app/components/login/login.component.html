@@ -5,12 +5,13 @@
 <!--<firebase-ui></firebase-ui>-->
 <section class="ftco-section">
   <div class="container" style="max-width: 480px;">
-    <ngx-auth-firebaseui appearance="outline"
+<!--    <img src="https://assets-ouch.icons8.com/free-download/235/f4f00529-ee1d-4a20-a1f8-79cec7c1a9cd.png?filename=pluto-sign-up.png" alt="Sign in" class="mb-2" width="100%">-->
+    <ngx-auth-firebaseui (onSuccess)="goToHomepage()"
                          [providers]="providers.Github"
-                         tosUrl="/terms-of-service"
-                         privacyPolicyUrl="/privacy-policy"
+                         appearance="outline"
                          goBackURL="/"
-                         (onSuccess)="goToHomepage()"
+                         privacyPolicyUrl="/privacy-policy"
+                         tosUrl="/terms-of-service"
     ></ngx-auth-firebaseui>
   </div>
 </section>

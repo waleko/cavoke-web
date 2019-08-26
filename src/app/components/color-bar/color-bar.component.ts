@@ -9,12 +9,14 @@ export class ColorBarComponent implements OnInit {
   public owlStyle;
   @Input() title: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    if (this.title)
-      this.owlStyle = {height: "300px"};
-    else
-      this.owlStyle = {height: "110px"};
+    if (this.title) {
+      this.owlStyle = {height: '300px'};
+    } else {
+      this.owlStyle = {height: '110px'};
+    }
   }
 }

@@ -1,7 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">cavoke</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+    <button aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#ftco-nav"
+            data-toggle="collapse" type="button">
       <span class="oi oi-menu"></span> Menu
     </button>
 
@@ -10,9 +12,10 @@
         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="/library">Games</a></li>
         <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-        <li class="nav-item cta" *ngIf="show_signin_button | async"><a class="nav-link" href="/login"><span>Sign in</span></a></li>
+        <li *ngIf="show_signin_button | async" class="nav-item cta"><a class="nav-link"
+                                                                       href="/login"><span>Sign in</span></a></li>
         <li class="nav-item">
-          <div style="padding: 4px;">
+          <div class="ml-3" style="padding: 4px;">
             <ngx-auth-firebaseui-avatar></ngx-auth-firebaseui-avatar>
           </div>
         </li>
@@ -29,8 +32,10 @@
           <h2 class="ftco-heading-2 ftco-animate">cavoke</h2>
           <p class="ftco-animate">Free open-source cross-platform tool for creating text-based and board games</p>
           <ul class="ftco-footer-social list-unstyled mb-0">
-            <li class="ftco-animate"><a href="https://github.com/cavoke-project/"><span class="icon-github"></span></a></li>
-            <li class="ftco-animate"><a href="mailto:cavoke@alexkovrigin.me"><span class="icon-envelope"></span></a></li>
+            <li class="ftco-animate"><a href="https://github.com/cavoke-project/"><span class="icon-github"></span></a>
+            </li>
+            <li class="ftco-animate"><a href="mailto:cavoke@alexkovrigin.me"><span class="icon-envelope"></span></a>
+            </li>
             <li class="ftco-animate"><a href="https://t.me/waleko/"><span class="icon-telegram"></span></a></li>
             <li class="ftco-animate"><a href="https://vk.com/alex.kovrigin"><span class="icon-vk"></span></a></li>
           </ul>
@@ -60,18 +65,22 @@
         </div>
       </div>
       <div class="col-md text-center">
-        <a href="https://github.com/cavoke-project/" class="btn btn-secondary btn-secondary-2 p-3 px-xl-5 py-xl-3 ftco-animate" >View on GitHub</a>
+        <a class="btn btn-secondary btn-secondary-2 p-3 px-xl-5 py-xl-3 ftco-animate"
+           href="https://github.com/cavoke-project/">View on GitHub</a>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 text-center">
         <p class="ftco-animate">
           Copyright &copy; {{year}} Alexander Kovrigin | This <a href="https://cavoke.alexkovrigin.me">website</a> and
-          <a href="https://github.com/cavoke-project/">Cavoke</a> as a whole is provided under the <a href="/license">MIT License</a></p>
+          <a href="https://github.com/cavoke-project/">Cavoke</a> as a whole is provided under the <a href="/license">MIT
+          License</a></p>
         <p class="ftco-animate">
-          Template used is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com">Colorlib</a> and is provided under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+          Template used is made with <i aria-hidden="true" class="icon-heart"></i> by <a href="https://colorlib.com">Colorlib</a>
+          and is provided under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
         </p>
-        <p class="ftco-animate">Background photo by <a href="https://unsplash.com/@cdr6934">Chris Ried</a> from <a href="https://unsplash.com">Unsplash</a> | Gorgeous SVG images from <a href="https://undraw.co">unDraw</a></p>
+        <p class="ftco-animate">Background photo by <a href="https://unsplash.com/@cdr6934">Chris Ried</a> from <a
+          href="https://unsplash.com">Unsplash</a> | Gorgeous SVG images from <a href="https://undraw.co">unDraw</a></p>
         <p class="ftco-animate">
           Icons at the home page are made by
           <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a>,
@@ -80,26 +89,19 @@
           <a href="https://www.flaticon.com/authors/mynamepong" title="mynamepong">mynamepong</a> and
           <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a>
           from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
-          provided under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+          provided under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY
+          3.0</a>
         </p>
-        <!-- <p>
-          <a class="btn btn-primary" data-toggle="collapse" href="collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Link with href
-          </a>
-        </p>
-        <div class="collapse" id="collapseExample">
-          #233142
-          <div class="card card-body" style="background-color: ">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
 </footer>
 
 
-
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-  <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"></circle>
-  <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#59B6F5"></circle></svg></div>
+<div class="show fullscreen" id="ftco-loader">
+  <svg class="circular" height="48px" width="48px">
+    <circle class="path-bg" cx="24" cy="24" fill="none" r="22" stroke="#eeeeee" stroke-width="4"></circle>
+    <circle class="path" cx="24" cy="24" fill="none" r="22" stroke="#59B6F5" stroke-miterlimit="10"
+            stroke-width="4"></circle>
+  </svg>
+</div>

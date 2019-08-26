@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthProvider} from 'ngx-auth-firebaseui';
 
 
@@ -10,11 +10,13 @@ import {AuthProvider} from 'ngx-auth-firebaseui';
 export class LoginComponent implements OnInit {
   providers = AuthProvider;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
+
   goToHomepage() {
-    window.location.href = "/";
+    window.location.href = '/';
   }
 }

@@ -1,139 +1,83 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase';
-import {tap} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {skipUntil, tap} from 'rxjs/operators';
+import {observable, Subject} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class BackendService {
-  private afAuth: AngularFireAuth;
-  constructor(private httpClient: HttpClient, afAuth: AngularFireAuth) {
-    this.afAuth = afAuth;
+  constructor(private httpClient: HttpClient, private afAuth: AngularFireAuth, public router: Router) {
+    console.log(this.router);
   }
+
+  public isFailStatus(data) {
+    const ok_status: boolean = data['status'] == 'OK';
+    if (!ok_status) {
+      console.error('Not ok response!');
+      console.log(data['message']);
+    }
+    return !ok_status;
+  }
+
+  public handleError(err, router: Router = null) {
+    if (router == null) {
+      router = this.router;
+    }
+    console.error(err);
+    setTimeout(() => {
+      console.log("wow");
+      console.log(this);
+      console.log(router);
+      router.navigateByUrl("/error", { skipLocationChange: true });
+    });
+
+  }
+
   private static makeUrl(method: string) {
-    return environment.api_home + method + "/";
-  }
-
-  // private async wrapperFunc(auth) {
-  //   console.log(3);
-  //   const token = await auth.getIdToken();
-  //   console.log(token);
-  //   return token
-  // }
-
-  private getIdToken()
-  {
-    // const auth = this.afAuth.auth;
-    // auth.onAuthStateChanged((user) => {
-    //   return user.getIdToken().then((token) => {
-    //     console.log(token);
-    //     return token;
-    //   })
-    // });
-    // console.error("yikes!");
-
-    // const token = this.afAuth.authState.subscribe(async auth => {
-    //   console.log(auth);
-    //   const result = await auth.getIdToken();
-    //   console.log(result);
-    //   return result;
-    // });
-    // console.log(token);
-    // return token;
-
-    // this.afAuth.authState.subscribe(auth => {
-    //   console.log(2);
-    //   return this.wrapperFunc(auth);
-    // });
-    // console.log(1);
-  }
-
-  private getAuthHeader() {
-    const header = new HttpHeaders({Authorization : 'JWT ' });
-    console.log(header);
-    return header;
+    return environment.api_home + method + '/';
   }
 
   public getTypes() {
-    return this.httpClient.get(BackendService.makeUrl('getTypes'), {headers: this.getAuthHeader()});
+    return this.sendAuthRequest('getTypes');
   }
 
   public getSessions() {
-    return this.httpClient.get(BackendService.makeUrl('getSessions'));
-  }
-
-  // private sendAuthRequest(url: string, url_params={})
-  // {
-  //   // const auth_state = this.afAuth.authState;
-  //   // return new Promise(resolve => {
-  //   //     auth_state.subscribe(auth => {
-  //   //       const promise = auth.getIdToken().then(token =>
-  //   //       {
-  //   //         const header = new HttpHeaders({Authorization : 'JWT ' + token});
-  //   //         resolve(this.httpClient.get(url, {headers: header, params: url_params}));
-  //   //       });
-  //   //     })
-  //   // });
-  //   return this.afAuth.authState.toPromise().then(auth => {
-  //     console.log(auth);
-  //     return auth.getIdToken().then(token => {
-  //       console.log(token);
-  //       const header = new HttpHeaders({Authorization : 'JWT ' + token});
-  //       const result = this.httpClient.get(url, {headers: header, params: url_params});
-  //       console.log(result);
-  //       return result;
-  //     })
-  //   })
-  // }
-
-  // getTokenHeader() {
-  //   // return firebase.auth().currentUser.getIdToken()
-  //   //   .then(token => {
-  //   //     console.log(token);
-  //   //     let tokenHeader = new Headers({
-  //   //       'Authorization': token
-  //   //     });
-  //   //     tokenHeader.append('Content-Type', 'application/json');
-  //   //     return tokenHeader;
-  //   //   });
-  //   console.log(this.afAuth.auth);
-  //   console.log(this.afAuth.auth.currentUser);
-  //   const token = JSON.parse(JSON.stringify(this.afAuth.auth.currentUser)).stsTokenManager.accessToken;
-  //   const header = new HttpHeaders({Authorization : 'JWT ' + token});
-  //   return header;
-  // }
-
-  private sendAuthRequest(method: string, url_params={})
-  {
-    const url = BackendService.makeUrl(method);
-    var subject = new Subject<Promise<any>>();
-    const obs = this.afAuth.authState.subscribe(auth => {
-      console.log(auth);
-      const promise = new Promise(resolve => {
-        auth.getIdToken().then(token => {
-          console.log(token);
-          const header = new HttpHeaders({Authorization: 'JWT ' + token});
-          this.httpClient.get(url, {headers: header, params: url_params}).subscribe(data => {resolve(data)});
-        });
-      });
-      console.log("umba");
-      console.log(promise);
-      subject.next(promise);
-      console.log(subject)
-    });
-    console.log("kumba");
-    console.log(subject);
-    return subject.asObservable();
+    return this.sendAuthRequest('getSessions');
   }
 
   public createSession(gameTypeId: string) {
     return this.sendAuthRequest('newSession', {game_type_id: gameTypeId});
+  }
 
-    // return this.httpClient.get(BackendService.makeUrl('newSession'), {headers: this.getTokenHeader(), params: {game_type_id: gameTypeId}});
+  public getSession(gameId: string) {
+    return this.sendAuthRequest('getSession', {game_id: gameId});
+  }
+
+  public clickUnit(gameId: string, unitClickedId: string) {
+    return this.sendAuthRequest('click', {game_id: gameId, unit_clicked: unitClickedId});
+  }
+
+  private sendAuthRequest(method: string, url_params = {}) {
+    const url = BackendService.makeUrl(method);
+    const subject = new Subject<Object>();
+    this.afAuth.authState.subscribe(auth => {
+      if (auth == null) {
+        console.error('No authentication. Please login.');
+      } else {
+        auth.getIdToken().then(token => {
+          const header = new HttpHeaders({Authorization: 'JWT ' + token});
+          this.httpClient.get(url, {headers: header, params: url_params}).subscribe(data => {
+            subject.next(data);
+          }, (err) => {this.handleError(err, this.router)});
+        });
+      }
+    });
+    return subject.asObservable();
   }
 }

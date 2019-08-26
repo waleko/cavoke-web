@@ -8,51 +8,52 @@ import {BackendService} from '../../services/backend.service';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute, private service: BackendService) { }
-  @ViewChild('myCanvas', {static: false}) myCanvas: ElementRef;
+  @ViewChild('canvas', {static: true}) canvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
+  private gameId: string;
+  private game_data: Object;
+  private canvas_data: Object;
+
+  constructor(private route: ActivatedRoute, private service: BackendService) {
+  }
+
+  updateCanvas(data: Object) {
+
+  }
 
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        console.log(params); // FIXME remove
-        if("type" in params) {
-          console.log("in"); // FIXME remove
+        if ('type' in params) {
+          // create new session and redirect
           const game_type_id = params['type'];
-          console.log(game_type_id);
           const observable = this.service.createSession(game_type_id);
-          console.log("bumba");
-          console.log(observable);
-          observable.subscribe(promise => {
-            promise.then(
-              data => {
-                console.log("yikes");
-                console.log(data);
-                if (data['status'] != 'OK') {
-                  console.error("Not ok response!");
-                  console.log(data['message']);
-                  return;
-                }
-                console.log("ok");
-                console.log("data");
-                const game = data['response']['game'];
-                const game_id = game.game_session_id;
-                window.location.href = '/game?game_id=' + game_id;
-              },
-              err => {
-                console.log(err);
-              }
-            );
-          })
-        }
-        else {
-
+          observable.subscribe(response => {
+            if (this.service.isFailStatus(response)) {
+              return;
+            }
+            const game = response['response']['game'];
+            const game_id = game.game_session_id;
+            window.location.href = '/game?game_id=' + game_id;
+          }, this.service.handleError);
+        } else if ('game_id' in params) {
+          this.gameId = params['game_id'];
+          this.service.getSession(this.gameId).subscribe(response => {
+            if (this.service.isFailStatus(response)) {
+              return;
+            }
+            this.canvas_data = response['response']['data'];
+            this.game_data = response['response']['game'];
+          }, this.service.handleError);
+        } else {
+          console.error('Bad request!');
         }
       });
     this.ngAfterViewInit();
   }
+
   ngAfterViewInit() {
-    this.context = (this.myCanvas.nativeElement).getContext('2d');
+    this.context = this.canvas.nativeElement.getContext('2d');
+    this.updateCanvas(this.canvas_data);
   }
 }
