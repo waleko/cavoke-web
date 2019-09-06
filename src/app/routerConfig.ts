@@ -9,6 +9,7 @@ import {TermsOfServiceComponent} from './components/terms-of-service/terms-of-se
 import {LibraryComponent} from './components/library/library.component';
 import {GameComponent} from './components/game/game.component';
 import {ErrorComponent} from './components/error/error.component';
+import {NoconnectionComponent} from './components/noconnection/noconnection.component';
 
 export const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,5 +21,6 @@ export const appRoutes: Routes = [
   {path: 'library', component: LibraryComponent},
   {path: 'game', component: GameComponent},
   {path: 'error', component: ErrorComponent},
+  {path: 'noconnection', component: NoconnectionComponent},
   {path: '**', component: NotfoundComponent},
 ];

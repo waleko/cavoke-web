@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase';
@@ -13,7 +13,6 @@ import {Router} from '@angular/router';
 
 export class BackendService {
   constructor(private httpClient: HttpClient, private afAuth: AngularFireAuth, public router: Router) {
-    console.log(this.router);
   }
 
   public isFailStatus(data) {
@@ -30,13 +29,10 @@ export class BackendService {
       router = this.router;
     }
     console.error(err);
+    const isNoInternet = !window.navigator.onLine;
     setTimeout(() => {
-      console.log("wow");
-      console.log(this);
-      console.log(router);
-      router.navigateByUrl("/error", { skipLocationChange: true });
+      router.navigateByUrl((isNoInternet ? "/noconnection" : "/error"), { skipLocationChange: true });
     });
-
   }
 
   private static makeUrl(method: string) {
@@ -44,7 +40,7 @@ export class BackendService {
   }
 
   public getTypes() {
-    return this.sendAuthRequest('getTypes');
+    return this.sendUnauthRequest('getTypes');
   }
 
   public getSessions() {
@@ -68,7 +64,7 @@ export class BackendService {
     const subject = new Subject<Object>();
     this.afAuth.authState.subscribe(auth => {
       if (auth == null) {
-        console.error('No authentication. Please login.');
+        this.handleError("Please authenticate.");
       } else {
         auth.getIdToken().then(token => {
           const header = new HttpHeaders({Authorization: 'JWT ' + token});
@@ -78,6 +74,15 @@ export class BackendService {
         });
       }
     });
+    return subject.asObservable();
+  }
+
+  private sendUnauthRequest(method: string, url_params = {}) {
+    const url = BackendService.makeUrl(method);
+    const subject = new Subject<Object>();
+    this.httpClient.get(url, {params: url_params}).subscribe(data => {
+      subject.next(data);
+    }, (err) => {this.handleError(err, this.router)});
     return subject.asObservable();
   }
 }

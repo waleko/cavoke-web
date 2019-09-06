@@ -26,6 +26,7 @@ import {AngularFirePerformanceModule} from '@angular/fire/performance';
 import { NewGameComponent } from './components/new-game/new-game.component';
 import { ErrorComponent } from './components/error/error.component';
 import {BackendService} from './services/backend.service';
+import { NoconnectionComponent } from './components/noconnection/noconnection.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDjK0nU2IvK_DZ7rfH37ffYyaVjeNWgcq4',
@@ -51,7 +52,8 @@ const firebaseConfig = {
     NotfoundComponent,
     TermsOfServiceComponent,
     NewGameComponent,
-    ErrorComponent
+    ErrorComponent,
+    NoconnectionComponent
   ],
   imports: [
     BrowserModule,

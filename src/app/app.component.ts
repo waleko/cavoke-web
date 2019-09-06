@@ -31,7 +31,7 @@ export class AppComponent {
   }
 
   public checkUser() {
-    if (this.afAuth.auth.currentUser) {
+    if (this.afAuth.auth.currentUser && !this.afAuth.auth.currentUser.isAnonymous) {
       this.show_signin_button.next(false);
     } else {
       this.show_signin_button.next(true);
