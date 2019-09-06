@@ -60,6 +60,7 @@ export class BackendService {
   }
 
   private sendAuthRequest(method: string, url_params = {}) {
+    console.log('yikes');
     const url = BackendService.makeUrl(method);
     const subject = new Subject<Object>();
     this.afAuth.authState.subscribe(auth => {
