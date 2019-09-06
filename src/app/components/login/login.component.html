@@ -1,13 +1,11 @@
 <app-color-bar title="Sign in"></app-color-bar>
-<!--<p>-->
-<!--  login works-->
-<!--</p>-->
-<!--<firebase-ui></firebase-ui>-->
+
 <section class="ftco-section">
   <div class="container" style="max-width: 480px;">
-<!--    <img src="https://assets-ouch.icons8.com/free-download/235/f4f00529-ee1d-4a20-a1f8-79cec7c1a9cd.png?filename=pluto-sign-up.png" alt="Sign in" class="mb-2" width="100%">-->
+    <img src="/assets/images/pluto-sign-up.svg" alt="Sign in" class="unselectable mb-2" width="100%">
     <ngx-auth-firebaseui (onSuccess)="goToHomepage()"
                          [providers]="providers.Github"
+                         [guestEnabled]="false"
                          appearance="outline"
                          goBackURL="/"
                          privacyPolicyUrl="/privacy-policy"

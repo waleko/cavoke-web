@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {Router, RouterModule} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -23,10 +23,9 @@ import {NotfoundComponent} from './components/notfound/notfound.component';
 import {TermsOfServiceComponent} from './components/terms-of-service/terms-of-service.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularFirePerformanceModule} from '@angular/fire/performance';
-import { NewGameComponent } from './components/new-game/new-game.component';
-import { ErrorComponent } from './components/error/error.component';
-import {BackendService} from './services/backend.service';
-import { NoconnectionComponent } from './components/noconnection/noconnection.component';
+import {NewGameComponent} from './components/new-game/new-game.component';
+import {ErrorComponent} from './components/error/error.component';
+import {NoconnectionComponent} from './components/noconnection/noconnection.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDjK0nU2IvK_DZ7rfH37ffYyaVjeNWgcq4',
