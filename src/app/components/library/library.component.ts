@@ -12,8 +12,6 @@ export class LibraryComponent implements OnInit {
   public gameInfos = [];
 
   constructor(private service: BackendService, router: Router) {
-    console.log("123");
-    console.log(router);
   }
 
   ngOnInit() {
@@ -24,5 +22,4 @@ export class LibraryComponent implements OnInit {
         this.gameInfos = data['response'].game_types;
       });
   }
-
 }

@@ -6,13 +6,14 @@ import * as firebase from 'firebase';
 import {skipUntil, tap} from 'rxjs/operators';
 import {observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
+import {NgxUiLoaderService} from 'ngx-ui-loader';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class BackendService {
-  constructor(private httpClient: HttpClient, private afAuth: AngularFireAuth, public router: Router) {
+  constructor(private httpClient: HttpClient, private afAuth: AngularFireAuth, public router: Router, private ngxService: NgxUiLoaderService) {
   }
 
   public isFailStatus(data) {
@@ -29,10 +30,10 @@ export class BackendService {
       router = this.router;
     }
     console.error(err);
-    const isNoInternet = !window.navigator.onLine;
-    setTimeout(() => {
-      router.navigateByUrl((isNoInternet ? "/noconnection" : "/error"), { skipLocationChange: true });
-    });
+    const isNoConnection = true;
+    // setTimeout(() => {
+    //   router.navigateByUrl((isNoConnection ? "/noconnection" : "/error"), { skipLocationChange: true });
+    // });
   }
 
   private static makeUrl(method: string) {
@@ -63,6 +64,7 @@ export class BackendService {
     console.log('yikes');
     const url = BackendService.makeUrl(method);
     const subject = new Subject<Object>();
+    this.ngxService.start();
     this.afAuth.authState.subscribe(auth => {
       if (auth == null) {
         this.handleError("Please authenticate.");
@@ -71,7 +73,8 @@ export class BackendService {
           const header = new HttpHeaders({Authorization: 'JWT ' + token});
           this.httpClient.get(url, {headers: header, params: url_params}).subscribe(data => {
             subject.next(data);
-          }, (err) => {this.handleError(err, this.router)});
+          }, (err) => {this.handleError(err, this.router)},
+            () => {this.ngxService.stop();});
         });
       }
     });
@@ -81,9 +84,12 @@ export class BackendService {
   private sendUnauthRequest(method: string, url_params = {}) {
     const url = BackendService.makeUrl(method);
     const subject = new Subject<Object>();
+    this.ngxService.start();
+    console.log("231");
     this.httpClient.get(url, {params: url_params}).subscribe(data => {
       subject.next(data);
-    }, (err) => {this.handleError(err, this.router)});
+    }, (err) => {this.handleError(err, this.router)},
+      () => {this.ngxService.stop()});
     return subject.asObservable();
   }
 }

@@ -26,6 +26,7 @@ import {AngularFirePerformanceModule} from '@angular/fire/performance';
 import {NewGameComponent} from './components/new-game/new-game.component';
 import {ErrorComponent} from './components/error/error.component';
 import {NoconnectionComponent} from './components/noconnection/noconnection.component';
+import {NgxUiLoaderModule} from 'ngx-ui-loader';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDjK0nU2IvK_DZ7rfH37ffYyaVjeNWgcq4',
@@ -67,7 +68,8 @@ const firebaseConfig = {
       }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFirePerformanceModule
+    AngularFirePerformanceModule,
+    NgxUiLoaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,8 +8,14 @@
     </div>
   </div>
   <div class="container">
-<!--    https://icons8.com/ouch/illustration/list-is-empty-3-->
-    <p *ngIf="gameInfos.length == 0">No games available</p>
+    <ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
+    <div class="d-flex justify-content-center">
+      <div class="col-6 " *ngIf="gameInfos.length == 0">
+        <img class="unselectable" src="/assets/images/list-is-empty-3.svg" alt="" width="100%" style="max-width: 400px;">
+        <p style="text-align:center">No games available</p>
+      </div>
+    </div>
+
     <div *ngFor="let game_info of gameInfos" class="row">
       <div class="col-md-4">
         <div class="card mb-4">
