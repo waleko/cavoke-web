@@ -30,10 +30,11 @@ export class BackendService {
       router = this.router;
     }
     console.error(err);
+    this.ngxService.stop();
     const isNoConnection = true;
-    // setTimeout(() => {
-    //   router.navigateByUrl((isNoConnection ? "/noconnection" : "/error"), { skipLocationChange: true });
-    // });
+    setTimeout(() => {
+      router.navigateByUrl((isNoConnection ? "/noconnection" : "/error"), { skipLocationChange: true });
+    });
   }
 
   private static makeUrl(method: string) {
@@ -66,8 +67,8 @@ export class BackendService {
     const subject = new Subject<Object>();
     this.ngxService.start();
     this.afAuth.authState.subscribe(auth => {
-      if (auth == null) {
-        this.handleError("Please authenticate.");
+      if (auth == null || !auth.emailVerified) {
+        this.handleError("Authenticate");
       } else {
         auth.getIdToken().then(token => {
           const header = new HttpHeaders({Authorization: 'JWT ' + token});

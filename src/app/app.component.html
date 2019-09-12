@@ -9,8 +9,7 @@
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/library">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="/">{{show_signin_button ? "Games" : "Home"}}</a></li>
         <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
         <li *ngIf="show_signin_button | async" class="nav-item cta"><a class="nav-link"
                                                                        href="/login"><span>Sign in</span></a></li>
@@ -29,7 +28,7 @@
     <div class="row mb-3">
       <div class="col-md">
         <div class="ftco-footer-widget mb-4 text-center">
-          <h2 class="ftco-heading-2 ftco-animate">cavoke</h2>
+          <h2 class="ftco-heading-2 ftco-animate"><a href="/">cavoke</a></h2>
           <p class="ftco-animate">Free open-source cross-platform tool for creating text-based and board games</p>
           <ul class="ftco-footer-social list-unstyled mb-0">
             <li class="ftco-animate"><a href="https://github.com/cavoke-project/"><span class="icon-github"></span></a>
@@ -72,23 +71,26 @@
     <div class="row">
       <div class="col-md-12 text-center">
         <p class="ftco-animate">
-          Copyright &copy; {{year}} Alexander Kovrigin | This <a href="https://cavoke.alexkovrigin.me">website</a> and
+          Copyright &copy; {{ year }} Alexander Kovrigin | This <a href="https://cavoke.alexkovrigin.me">website</a> and
           <a href="https://github.com/cavoke-project/">Cavoke</a> as a whole is provided under the <a href="/license">MIT
           License</a></p>
         <p class="ftco-animate">
-          Template used is made with <i aria-hidden="true" class="icon-heart"></i> by <a href="https://colorlib.com">Colorlib</a>
+          This website was built using template made with <i aria-hidden="true" class="icon-heart"></i> by <a href="https://colorlib.com">Colorlib</a>
           and is provided under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
         </p>
-        <p class="ftco-animate">Background photo by <a href="https://unsplash.com/@cdr6934">Chris Ried</a> from <a
+        <p class="ftco-animate">Background photo was made by <a href="https://unsplash.com/@cdr6934">Chris Ried</a> from <a
           href="https://unsplash.com">Unsplash</a> | Gorgeous vector graphics from <a href="https://undraw.co">unDraw</a> and <a href="https://icons8.com">Icons8</a></p>
         <p class="ftco-animate">
-          Icons at the home page are made by
+          <a href="https://www.elegantthemes.com/blog/freebie-of-the-week/beautiful-flat-icons-for-free">Circle icons</a> used throughout the project were made by <a href="https://www.elegantthemes.com" title="Dave Gandy">Nick Roach</a>
+        </p>
+        <p class="ftco-animate">
+          Icons at the home page were made by
           <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a>,
           <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a>,
           <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>,
           <a href="https://www.flaticon.com/authors/mynamepong" title="mynamepong">mynamepong</a> and
           <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a>
-          from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+          from <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a>
           provided under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY
           3.0</a>
         </p>

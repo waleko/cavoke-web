@@ -3,13 +3,13 @@
 <section class="ftco-section">
   <div class="container" style="max-width: 480px;">
     <img src="/assets/images/pluto-sign-up.svg" alt="Sign in" class="unselectable mb-2" width="100%">
-    <ngx-auth-firebaseui (onSuccess)="goToHomepage()"
-                         [providers]="providers.Github"
-                         [guestEnabled]="false"
-                         appearance="outline"
-                         goBackURL="/"
-                         privacyPolicyUrl="/privacy-policy"
-                         tosUrl="/terms-of-service"
+    <ngx-auth-firebaseui
+      [providers]="providers.Github"
+      [guestEnabled]="false"
+      appearance="outline"
+      goBackURL="/"
+      privacyPolicyUrl="/privacy-policy"
+      tosUrl="/terms-of-service"
     ></ngx-auth-firebaseui>
   </div>
 </section>

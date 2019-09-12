@@ -26,7 +26,7 @@ import {AngularFirePerformanceModule} from '@angular/fire/performance';
 import {NewGameComponent} from './components/new-game/new-game.component';
 import {ErrorComponent} from './components/error/error.component';
 import {NoconnectionComponent} from './components/noconnection/noconnection.component';
-import {NgxUiLoaderModule} from 'ngx-ui-loader';
+import {NgxUiLoaderHttpModule, NgxUiLoaderModule} from 'ngx-ui-loader';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDjK0nU2IvK_DZ7rfH37ffYyaVjeNWgcq4',
@@ -69,7 +69,36 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirePerformanceModule,
-    NgxUiLoaderModule,
+    NgxUiLoaderModule.forRoot({
+      "bgsColor": "#ba70c5",
+      "bgsOpacity": 0.5,
+      "bgsPosition": "center-center",
+      "bgsSize": 60,
+      "bgsType": "wandering-cubes",
+      "blur": 5,
+      "delay": 0,
+      "fgsColor": "\t#A0DF97",
+      "fgsPosition": "center-center",
+      "fgsSize": 60,
+      "fgsType": "folding-cube",
+      "gap": 24,
+      "logoPosition": "center-center",
+      "logoSize": 120,
+      "logoUrl": "/assets/images/icon-512px.png",
+      "masterLoaderId": "master",
+      "overlayBorderRadius": "0",
+      "overlayColor": "#FFFFFF",
+      "pbColor": "red",
+      "pbDirection": "ltr",
+      "pbThickness": 3,
+      "hasProgressBar": true,
+      "text": "",
+      "textColor": "#FFFFFF",
+      "textPosition": "center-center",
+      "maxTime": -1,
+      "minTime": 500
+    }),
+    NgxUiLoaderHttpModule.forRoot({loaderId: "loader-1", showForeground: true})
   ],
   providers: [],
   bootstrap: [AppComponent]

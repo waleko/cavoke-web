@@ -3,32 +3,33 @@
   <div class="container">
     <div class="d-flex flex-row-reverse">
       <a href="/new-game">
-        <button type="button" class="btn btn-primary" >New game</button>
+        <button type="button" class="btn btn-primary mb-3" >New game</button>
       </a>
     </div>
   </div>
-  <div class="container">
-    <ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader>
-    <div class="d-flex justify-content-center">
-      <div class="col-6 " *ngIf="gameInfos.length == 0">
-        <img class="unselectable" src="/assets/images/list-is-empty-3.svg" alt="" width="100%" style="max-width: 400px;">
-        <p style="text-align:center">No games available</p>
+  <div class="container" style="position: relative;">
+    <div class="container" [loaderId]="'loader-1'" ngxUiLoaderBlurred>
+      <div class="d-flex justify-content-center">
+        <div class="col-6 " *ngIf="gameInfos.length == 0">
+          <img class="unselectable mt-2" src="/assets/images/list-is-empty-3.svg" alt="" width="100%" style="max-width: 400px;">
+          <p style="text-align:center">No games available</p>
+        </div>
       </div>
-    </div>
-
-    <div *ngFor="let game_info of gameInfos" class="row">
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <img alt="Card image cap" class="card-img-top" src="//placeimg.com/290/180/any">
-          <div class="card-body">
-            <h5 class="card-title">{{game_info.name}}</h5>
-            <p class="card-text">{{game_info.description}}</p>
-            <p style="color: #d1d1d1">by {{game_info.creator_display_name}}</p>
-            <a class="btn btn-outline-dark btn-sm" href="/game?type={{game_info.game_type_id}}">Play</a>
+      <div *ngFor="let game_info of gameInfos" class="row">
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <img alt="Card image cap" class="card-img-top" src="//placeimg.com/290/180/any">
+            <div class="card-body">
+              <h5 class="card-title">{{game_info.name}}</h5>
+              <p class="card-text">{{game_info.description}}</p>
+              <p style="color: #d1d1d1">by {{game_info.creator_display_name}}</p>
+              <a class="btn btn-outline-dark btn-sm" href="/game?type={{game_info.game_type_id}}">Play</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <ngx-ui-loader [loaderId]="'loader-1'"></ngx-ui-loader>
   </div>
 </section>
 

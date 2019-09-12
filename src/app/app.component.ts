@@ -14,7 +14,8 @@ export class AppComponent {
   public year;
 
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth) {
+    console.log("init");
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
         this.show_signin_button.next(false);
@@ -28,6 +29,11 @@ export class AppComponent {
       resolve(true);
     });
     this.year = new Date().getFullYear();
+    const node = document.createElement('style');
+    node.type = 'text/css';
+    node.innerHTML = "html {background: #233142;}";
+    document.getElementsByTagName('head')[0].appendChild(node);
+    console.log("app.component initialised")
   }
 
   public checkUser() {
@@ -40,7 +46,6 @@ export class AppComponent {
 
   public loadScript() {
     let isFound = false;
-    console.log("oikes");
     const scripts = document.getElementsByTagName('script');
     for (let i = 0; i < scripts.length; ++i) {
       if (scripts[i].getAttribute('src') != null && scripts[i].getAttribute('src').includes('loader')) {
